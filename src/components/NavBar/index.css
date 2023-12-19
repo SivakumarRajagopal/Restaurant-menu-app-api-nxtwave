@@ -46,28 +46,7 @@
 }
 
 @media screen and (max-width: 650px) {
-  .nav-mobile-container {
-    display: flex;
-    justify-content: space-between;
-    width: 95%;
-    margin: auto;
-  }
-
-  .nav-container {
-    display: none;
-  }
-
   .cart-orders {
     font-size: 0.4rem;
-  }
-}
-
-@media screen and (min-width: 650px) {
-  .nav-mobile-container {
-    display: none;
-  }
-
-  .nav-container {
-    display: flex;
   }
 }
