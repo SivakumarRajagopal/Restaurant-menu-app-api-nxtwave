@@ -1,9 +1,12 @@
-import {useState} from 'react'
+import {useState, useContext} from 'react'
 import './index.css'
 import EachMenu from '../EachMenu'
+import RestaurantContext from '../../context/RestaurantContext'
 
-const RenderPage = props => {
-  const {formattedData} = props
+const RenderPage = () => {
+  const {apiResponse} = useContext(RestaurantContext)
+  const {data} = apiResponse
+  const {formattedData} = data
 
   const [activeTabs, setActiveTab] = useState(formattedData[0].menuCategoryId)
 

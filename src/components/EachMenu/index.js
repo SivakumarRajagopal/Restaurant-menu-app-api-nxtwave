@@ -1,12 +1,12 @@
 import {useState, useContext} from 'react'
 import './index.css'
-import CartContext from '../../context/CartContext'
+import RestaurantContext from '../../context/RestaurantContext'
 
 const EachMenu = props => {
   const {eachItemDetails} = props
-  const {setCartItems} = useContext(CartContext)
+  const {addCartItem} = useContext(RestaurantContext)
 
-  const [orderNo, setOrderNo] = useState(0)
+  const [quantity, setQuantity] = useState(0)
 
   const {
     dishAvailability,
@@ -22,15 +22,15 @@ const EachMenu = props => {
   } = eachItemDetails
 
   const handleMinusSign = () => {
-    setOrderNo(prevOrderNo => (prevOrderNo !== 0 ? prevOrderNo - 1 : 0))
-    if (orderNo !== 0) {
-      setCartItems(prevCartItems => prevCartItems - 1)
-    }
+    setQuantity(prevQuantity => (prevQuantity !== 0 ? prevQuantity - 1 : 0))
   }
 
   const handlePlusSign = () => {
-    setOrderNo(prevOrderNo => prevOrderNo + 1)
-    setCartItems(prevCartItems => prevCartItems + 1)
+    setQuantity(prevQuantity => prevQuantity + 1)
+  }
+
+  const handleAddCartBtn = () => {
+    addCartItem({...eachItemDetails, quantity})
   }
 
   const dishTypeImg =
@@ -53,21 +53,30 @@ const EachMenu = props => {
               <button
                 type="button"
                 className="add-sub-btn"
-                onClick={() => handleMinusSign()}
+                onClick={handleMinusSign}
               >
                 -
               </button>
-              <p className="number-dish">{orderNo}</p>
+              <p className="number-dish">{quantity}</p>
               <button
                 type="button"
                 className="add-sub-btn"
-                onClick={() => handlePlusSign()}
+                onClick={handlePlusSign}
               >
                 +
               </button>
             </div>
           ) : (
             <p className="not-available-error">Not available</p>
+          )}
+          {quantity > 0 && (
+            <button
+              type="button"
+              onClick={handleAddCartBtn}
+              className="add-cart-btn"
+            >
+              ADD TO CART
+            </button>
           )}
           {addOnCat.length !== 0 && (
             <p className="custom-avail">Customizations available</p>
