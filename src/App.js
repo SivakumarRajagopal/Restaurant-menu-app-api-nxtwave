@@ -26,7 +26,7 @@ const App = () => {
   const [cartList, setCartList] = useState([])
 
   const removeAllCartItems = () => {
-    setCartList({cartList: []})
+    setCartList([])
   }
 
   const removeCartItem = dishId => {
@@ -34,19 +34,19 @@ const App = () => {
       eachCartItem => eachCartItem.dishId !== dishId,
     )
 
-    setCartList({cartList: updatedCartList})
+    setCartList(updatedCartList)
   }
 
   const incrementCartItemQuantity = dishId => {
-    setCartList(prevState => ({
-      cartList: prevState.cartList.map(eachCartItem => {
+    setCartList(prevCartList =>
+      prevCartList.map(eachCartItem => {
         if (dishId === eachCartItem.dishId) {
           const updatedQuantity = eachCartItem.quantity + 1
           return {...eachCartItem, quantity: updatedQuantity}
         }
         return eachCartItem
       }),
-    }))
+    )
   }
 
   const decrementCartItemQuantity = dishId => {
@@ -54,15 +54,15 @@ const App = () => {
       eachCartItem => eachCartItem.dishId === dishId,
     )
     if (productObject.quantity > 1) {
-      setCartList(prevState => ({
-        cartList: prevState.cartList.map(eachCartItem => {
+      setCartList(prevCartList =>
+        prevCartList.map(eachCartItem => {
           if (dishId === eachCartItem.dishId) {
             const updatedQuantity = eachCartItem.quantity - 1
             return {...eachCartItem, quantity: updatedQuantity}
           }
           return eachCartItem
         }),
-      }))
+      )
     } else {
       removeCartItem(dishId)
     }
@@ -74,10 +74,10 @@ const App = () => {
     const productObject = cartList.find(
       eachCartItem => eachCartItem.dishId === product.dishId,
     )
-    console.log(productObject)
+
     if (productObject) {
-      setCartList(prevState => ({
-        cartList: prevState.cartList.map(eachCartItem => {
+      setCartList(prevCartList =>
+        prevCartList.map(eachCartItem => {
           if (productObject.dishId === eachCartItem.dishId) {
             const updatedQuantity = eachCartItem.quantity + product.quantity
 
@@ -85,13 +85,10 @@ const App = () => {
           }
           return eachCartItem
         }),
-      }))
+      )
     } else {
-      const updatedCartList = [...cartList, product]
-      setCartList({cartList: updatedCartList})
+      setCartList(prevCartList => [...prevCartList, product])
     }
-
-    //     //   TODO: Update the code here to implement addCartItem
   }
 
   useEffect(() => {
