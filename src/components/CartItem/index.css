@@ -76,10 +76,18 @@
 .cart-quantity-container {
   display: flex;
   align-items: center;
+  margin-right: 1.5rem;
+  margin-left: 1.5rem;
 }
 
 .quantity-controller-button {
   padding: 0;
+  outline: none;
+  cursor: pointer;
+  color: #ffffff;
+  background-color: #000000;
+  border: none;
+  font-size: 1rem;
 }
 
 .cart-quantity {

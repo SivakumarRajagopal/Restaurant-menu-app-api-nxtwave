@@ -31,10 +31,14 @@ const NavBar = props => {
         <div className="cart-container">
           <p className="my-order-menu">My Orders</p>
           <Link to="/cart" className="link-item">
-            <div className="cart-icon-container">
+            <button
+              type="button"
+              data-testid="cart"
+              className="cart-btn cart-icon-container"
+            >
               <AiOutlineShoppingCart size={24} className="cart-icon" />
               <p className="cart-orders">{cartList.length}</p>
-            </div>
+            </button>
           </Link>
 
           <button

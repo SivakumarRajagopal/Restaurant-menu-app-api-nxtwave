@@ -68,3 +68,11 @@
 .link-item {
   text-decoration: none;
 }
+
+.cart-btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+}
